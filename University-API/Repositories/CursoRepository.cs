@@ -43,7 +43,7 @@ public class CursoRepository : ICursoRepository
     {
         var curso = _context.Cursos.FirstOrDefault(curso => curso.Id == cursoAtualizado.Id);
         if (curso is null) return false;
-        _context.Cursos.Update(cursoAtualizado);
+        _context.Entry(curso).CurrentValues.SetValues(cursoAtualizado);
         _context.SaveChanges();
         return true;
     }

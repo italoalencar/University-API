@@ -22,11 +22,35 @@ public class CursoController : ControllerBase
         return CreatedAtAction(nameof(ReadCursoById), new { id = curso.Id}, curso);
     }
 
+    [HttpGet]
+    public IActionResult ReadCursos()
+    {
+        var cursos = _service.ReadAll();
+        if (cursos is null) return NoContent();
+        return Ok(cursos);
+    }
+
     [HttpGet("{id}")]
     public IActionResult ReadCursoById(int id)
     {
         var curso = _service.ReadById(id);
         if (curso is null) return NotFound();
         return Ok(curso);
+    }
+
+    [HttpPut]
+    public IActionResult UpdateCurso([FromBody] ReadCursoDTO cursoDTO)
+    {
+        var updated = _service.Update(cursoDTO);
+        if(updated) return NoContent();
+        return NotFound();
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteCurso(int id)
+    {
+        var deleted = _service.Delete(id);
+        if (deleted) return NoContent();
+        return NotFound();
     }
 }

@@ -8,7 +8,7 @@ public class CursoProfile : Profile
 {
     public CursoProfile() 
     {   
-        CreateMap<Curso, ReadCursoDTO>();
+        CreateMap<Curso, ReadCursoDTO>().ReverseMap();
         CreateMap<CreateCursoDTO, Curso>();
     }
 }
