@@ -15,12 +15,12 @@ public interface ICursoService
 
 }
 
-public class CursosService : ICursoService
+public class CursoService : ICursoService
 {
     private readonly ICursoRepository _repository;
     private readonly IMapper _mapper;
 
-    public CursosService(ICursoRepository repository, IMapper mapper)
+    public CursoService(ICursoRepository repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

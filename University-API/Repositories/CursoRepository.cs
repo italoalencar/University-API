@@ -8,7 +8,7 @@ public interface ICursoRepository
     Curso Create(Curso curso);
     ICollection<Curso> ReadAll();
     Curso? ReadById(int id);
-    bool Update(Curso curso);
+    bool Update(Curso cursoAtualizado);
     bool Delete(int id);
 }
 
