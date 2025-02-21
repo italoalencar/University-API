@@ -80,6 +80,8 @@ namespace University_API.Data
                     .WithMany()
                     .HasForeignKey(d => d.CodPreRequisito)
                     .HasConstraintName("pre_requisitos_cod_pre_requisito_fkey");
+
+                entity.HasKey(p => new { p.CodDisciplina, p.CodPreRequisito });
             });
 
             modelBuilder.Entity<Professor>(entity =>

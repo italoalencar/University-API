@@ -38,6 +38,14 @@ public class DisciplinaController : ControllerBase
         return Ok(disciplina);
     }
 
+    [HttpGet("{cod}/requisitos")]
+    public IActionResult GetRequisitos(string cod)
+    {
+        var disciplinaRequisitosDTO = _service.GetRequisitos(cod);
+        if (disciplinaRequisitosDTO is null) return NotFound();
+        return Ok(disciplinaRequisitosDTO);
+    }
+
     [HttpPut]
     public IActionResult UpdateDisciplina([FromBody] ReadDisciplinaDTO disciplinaDTO)
     {

@@ -5,9 +5,10 @@ namespace University_API.Repositories;
 
 public interface IDisciplinaRepository
 {
-    Disciplina Create(Disciplina disciplina);
+    Disciplina Create(Disciplina disciplina, ICollection<PreRequisito> preRequisitos);
     ICollection<Disciplina> ReadAll();
     Disciplina? ReadById(string cod);
+    ICollection<PreRequisito> GetRequisitos(string cod);
     bool Update(Disciplina disciplinaAtualizada);
     bool Delete(string cod);
 }
@@ -21,9 +22,14 @@ public class DisciplinaRepository : IDisciplinaRepository
         _context = context;
     }
 
-    public Disciplina Create(Disciplina disciplina)
+    public Disciplina Create(Disciplina disciplina, ICollection<PreRequisito> preRequisitos)
     {
         _context.Disciplinas.Add(disciplina);
+
+        foreach (var preRequisito in preRequisitos)
+        {
+            _context.PreRequisitos.Add(preRequisito);
+        }
         _context.SaveChanges();
         return disciplina;
     }
@@ -46,6 +52,11 @@ public class DisciplinaRepository : IDisciplinaRepository
         _context.Entry(disciplina).CurrentValues.SetValues(disciplinaAtualizada);
         _context.SaveChanges();
         return true;
+    }
+
+    public ICollection<PreRequisito> GetRequisitos(string cod)
+    {
+        return _context.PreRequisitos.Where(requisito => requisito.CodDisciplina!.Equals(cod)).ToList();
     }
 
     public bool Delete(string cod)
