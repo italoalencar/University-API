@@ -11,6 +11,7 @@ public interface IDisciplinaRepository
     ICollection<PreRequisito> GetRequisitos(string cod);
     bool Update(Disciplina disciplinaAtualizada);
     bool Delete(string cod);
+    bool DeleteReq(string cod, string codPreRequisito);
 }
 
 public class DisciplinaRepository : IDisciplinaRepository
@@ -65,6 +66,16 @@ public class DisciplinaRepository : IDisciplinaRepository
         disc.Cod.Equals(cod));
         if (disciplina is null) return false;
         _context.Disciplinas.Remove(disciplina);
+        _context.SaveChanges();
+        return true;
+    }
+
+    public bool DeleteReq(string cod, string codPreRequisito)
+    {
+        var preRequisito = _context.PreRequisitos.FirstOrDefault(disc =>
+        disc.CodDisciplina!.Equals(cod) && disc.CodPreRequisito!.Equals(codPreRequisito));
+        if (preRequisito is null) return false;
+        _context.PreRequisitos.Remove(preRequisito);
         _context.SaveChanges();
         return true;
     }

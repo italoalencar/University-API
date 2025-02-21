@@ -13,6 +13,7 @@ public interface IDisciplinaService
     DisciplinaRequisitosDTO GetRequisitos(string cod);
     bool Update(ReadDisciplinaDTO disciplinaDTO);
     bool Delete(string cod);
+    bool DeletePreRequisito(string cod, string codPreRequisito);
 }
 
 public class DisciplinaService : IDisciplinaService
@@ -89,6 +90,11 @@ public class DisciplinaService : IDisciplinaService
     public bool Delete(string cod)
     {
         return _repository.Delete(cod);
+    }
+
+    public bool DeletePreRequisito(string cod, string codPreRequisito)
+    {
+        return _repository.DeleteReq(cod, codPreRequisito);
     }
 }
 

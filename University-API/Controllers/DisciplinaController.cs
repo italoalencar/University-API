@@ -61,4 +61,12 @@ public class DisciplinaController : ControllerBase
         if (deleted) return NoContent();
         return NotFound();
     }
+
+    [HttpDelete("{cod}/requisitos/{codPreRequisito}")]
+    public IActionResult DeletePreRequisito(string cod, string codPreRequisito)
+    {
+        var deleted = _service.DeletePreRequisito(cod, codPreRequisito);
+        if (deleted) return NoContent();
+        return NotFound();
+    }
 }
