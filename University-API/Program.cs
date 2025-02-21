@@ -8,15 +8,19 @@ using University_API.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<UniversityContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("UniversityConnection")));
+    options
+    .UseLazyLoadingProxies()
+    .UseNpgsql(builder.Configuration.GetConnectionString("UniversityConnection")));
 
 builder.Services.AddScoped<ICursoRepository, CursoRepository>();
 builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
 builder.Services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
+builder.Services.AddScoped<ITurmaRepository, TurmaRepository>();
 
 builder.Services.AddScoped<ICursoService, CursoService>();
 builder.Services.AddScoped<IProfessorService, ProfessorService>();
 builder.Services.AddScoped<IDisciplinaService, DisciplinaService>();
+builder.Services.AddScoped<ITurmaService, TurmaService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
