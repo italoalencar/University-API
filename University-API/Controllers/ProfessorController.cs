@@ -46,7 +46,7 @@ public class ProfessorController : ControllerBase
         return NotFound();
     }
 
-    [HttpDelete]
+    [HttpDelete("{matricula}")]
     public IActionResult DeleteProfessor(string matricula) 
     {
         var deleted = _service.Delete(matricula);
