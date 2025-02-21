@@ -12,9 +12,11 @@ builder.Services.AddDbContext<UniversityContext>(options =>
 
 builder.Services.AddScoped<ICursoRepository, CursoRepository>();
 builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
+builder.Services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
 
 builder.Services.AddScoped<ICursoService, CursoService>();
 builder.Services.AddScoped<IProfessorService, ProfessorService>();
+builder.Services.AddScoped<IDisciplinaService, DisciplinaService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
