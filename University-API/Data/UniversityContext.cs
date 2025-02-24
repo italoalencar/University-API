@@ -50,6 +50,9 @@ namespace University_API.Data
 
             modelBuilder.Entity<HorarioTurma>(entity =>
             {
+                entity.HasKey(ht => ht.Id)
+                    .HasName("horario_turma_pkey");
+
                 entity.HasOne(d => d.IdTurmaNavigation)
                     .WithMany()
                     .HasForeignKey(d => d.IdTurma)

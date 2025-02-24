@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using University_API.Data;
@@ -11,9 +12,10 @@ using University_API.Data;
 namespace University_API.Migrations
 {
     [DbContext(typeof(UniversityContext))]
-    partial class UniversityContextModelSnapshot : ModelSnapshot
+    [Migration("20250224223000_add key HorarioTurma")]
+    partial class addkeyHorarioTurma
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,8 +162,7 @@ namespace University_API.Migrations
                         .HasColumnType("time without time zone")
                         .HasColumnName("termino");
 
-                    b.HasKey("Id")
-                        .HasName("horario_turma_pkey");
+                    b.HasKey("Id");
 
                     b.HasIndex("IdTurma");
 

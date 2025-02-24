@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace University_API.Models
 {
-    [Keyless]
     [Table("horario_turma")]
     public partial class HorarioTurma
     {
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
         [Column("id_turma")]
         public int? IdTurma { get; set; }
         [Column("dia_semana")]
