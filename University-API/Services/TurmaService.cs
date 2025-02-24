@@ -12,6 +12,10 @@ public interface ITurmaService
     ReadTurmaDTO? ReadById(int id);
     bool Update(UpdateTurmaDTO turmaDTO);
     bool Delete(int id);
+
+    bool AddProf(int idTurma, string matriculaProf);
+    ICollection<ReadProfessorDTO> GetProfsByTurma(int id);
+    bool DeleteProfFromTurma(int idTurma, string matriculaProf);
 }
 
 public class TurmaService : ITurmaService
@@ -55,6 +59,23 @@ public class TurmaService : ITurmaService
     public bool Delete(int id)
     {
         return _repository.Delete(id);
+    }
+
+
+    public bool AddProf(int idTurma, string matriculaProf)
+    {
+        return _repository.AddProf(idTurma, matriculaProf);
+    }
+
+    public ICollection<ReadProfessorDTO> GetProfsByTurma(int id)
+    {
+        var professores = _repository!.GetProfs(id);
+        return _mapper!.Map<List<ReadProfessorDTO>>(professores);
+    }
+
+    public bool DeleteProfFromTurma(int idTurma, string matriculaProf)
+    {
+        return _repository.DeleteProf(idTurma, matriculaProf);
     }
 }
 

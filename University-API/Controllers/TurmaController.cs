@@ -23,11 +23,11 @@ public class TurmaController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult ReadCursos()
+    public IActionResult ReadTurmas()
     {
-        var cursos = _service.ReadAll();
-        if (cursos is null) return NoContent();
-        return Ok(cursos);
+        var turmas = _service.ReadAll();
+        if (turmas is null) return NoContent();
+        return Ok(turmas);
     }
 
     [HttpGet("{id}")]
@@ -52,5 +52,30 @@ public class TurmaController : ControllerBase
         var deleted = _service.Delete(id);
         if (deleted) return NoContent();
         return NotFound();
+    }
+
+
+    [HttpPost("{idTurma}/Professor/{matriculaProf}")]
+    public IActionResult AddProfTurma(int idTurma, string matriculaProf)
+    {
+        var added = _service.AddProf(idTurma, matriculaProf);
+        if (added) return NoContent();
+        return NotFound("Professor ou turma não encontrado!");
+    }
+
+    [HttpGet("{id}/Professores")]
+    public IActionResult GetProfsByTurma(int id)
+    {
+        var professores = _service.GetProfsByTurma(id);
+        if (professores is null) return NoContent();
+        return Ok(professores);
+    }
+
+    [HttpDelete("{idTurma}/Professor/{matriculaProf}")]
+    public IActionResult DeleteProfFromTurma(int idTurma, string matriculaProf)
+    {
+        var deleted = _service.DeleteProfFromTurma(idTurma, matriculaProf);
+        if (deleted) return NoContent();
+        return NotFound("Turma não encontrada ou professor(a) não associado(a)!");
     }
 }

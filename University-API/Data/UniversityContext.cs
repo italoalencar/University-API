@@ -114,6 +114,8 @@ namespace University_API.Data
                     .WithMany()
                     .HasForeignKey(d => d.MatriculaProf)
                     .HasConstraintName("turma_professor_matricula_prof_fkey");
+
+                entity.HasKey(tp => new { tp.IdTurma, tp.MatriculaProf });
             });
 
             OnModelCreatingPartial(modelBuilder);
