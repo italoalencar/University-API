@@ -9,6 +9,9 @@ public interface IMatriculaRepository
     ICollection<Matricula> ReadAll();
     Matricula? ReadById(int id);
     bool Delete(int id);
+    bool AddNota(int id, Nota nota);
+    ICollection<Nota> GetNotas(int id);
+    bool DeleteNota(int idNota);
 }
 
 public class MatriculaRepository : IMatriculaRepository
@@ -44,6 +47,36 @@ public class MatriculaRepository : IMatriculaRepository
         var matricula = _context.Matriculas.FirstOrDefault(matricula => matricula.Id == id);
         if (matricula is null) return false;
         _context.Matriculas.Remove(matricula);
+        _context.SaveChanges();
+        return true;
+    }
+
+
+    public bool AddNota(int id, Nota nota)
+    {
+        var matriculaExists = _context.Matriculas.Any(m => m.Id == id);
+        if (matriculaExists)
+        {
+            nota.IdMatricula = id;
+            _context.Notas.Add(nota);
+            _context.SaveChanges();
+            return true;
+        }    
+
+        return false;
+    }
+
+    public ICollection<Nota> GetNotas(int id)
+    {
+        return _context.Notas.Where(nota => nota.IdMatricula == id).ToList();
+    }
+
+    public bool DeleteNota(int idNota)
+    {
+        var nota = _context.Notas.FirstOrDefault(nota => 
+        nota.Id == idNota);
+        if (nota is null) return false;
+        _context.Notas.Remove(nota);
         _context.SaveChanges();
         return true;
     }

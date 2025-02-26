@@ -45,5 +45,30 @@ public class MatriculaController : ControllerBase
         if (deleted) return NoContent();
         return NotFound();
     }
+
+
+    [HttpPost("/{id}/Nota")]
+    public IActionResult AddNota(int id, [FromBody] CreateNotaDTO notaDTO)
+    {
+        var notaCreated = _service.CreateNota(id, notaDTO);
+        if (notaCreated) return NoContent();
+        return NotFound("matricula nao encontrada!");
+    }
+
+    [HttpGet("/{id}/Nota")]
+    public IActionResult GetNotas(int id)
+    {
+        var notas = _service.GetNotas(id);
+        if (notas is null) return NoContent();
+        return Ok(notas);
+    }
+
+    [HttpDelete("/Nota/{idNota}")]
+    public IActionResult DeleteNota(int idNota)
+    {
+        var deleted = _service.DeleteNota(idNota);
+        if (deleted) return NoContent();
+        return NotFound();
+    }
 }
 

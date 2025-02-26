@@ -20,6 +20,6 @@ namespace University_API.Models
         [Column("peso")]
         public float? Peso { get; set; }
         [Column("nota")]
-        public float? Nota1 { get; set; }
+        public float? Valor { get; set; }
     }
 }

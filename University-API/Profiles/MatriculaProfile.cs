@@ -10,5 +10,8 @@ public class MatriculaProfile : Profile
     {
         CreateMap<Matricula, ReadMatriculaDTO>();
         CreateMap<CreateMatriculaDTO, Matricula>();
+
+        CreateMap<Nota, ReadNotaDTO>();
+        CreateMap<CreateNotaDTO, Nota>();
     }
 }

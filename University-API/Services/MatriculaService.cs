@@ -12,6 +12,10 @@ public interface IMatriculaService
     ReadMatriculaDTO? ReadById(int id);
     bool Delete(int id);
 
+    bool CreateNota(int id, CreateNotaDTO notaDTO);
+    ICollection<ReadNotaDTO> GetNotas(int id);
+    bool DeleteNota(int idNota);
+
 }
 
 public class MatriculaService : IMatriculaService
@@ -49,6 +53,24 @@ public class MatriculaService : IMatriculaService
     public bool Delete(int id)
     {
         return _repository.Delete(id);
+    }
+
+
+    public bool CreateNota(int id, CreateNotaDTO notaDTO)
+    {
+        var nota = _mapper.Map<Nota>(notaDTO);
+        return _repository.AddNota(id, nota);
+    }
+
+    public ICollection<ReadNotaDTO> GetNotas(int id)
+    {
+        var notas = _repository.GetNotas(id);
+        return _mapper.Map<List<ReadNotaDTO>>(notas);
+    }
+
+    public bool DeleteNota(int idNota)
+    {
+        return _repository.DeleteNota(idNota);
     }
 }
 
