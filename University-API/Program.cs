@@ -17,12 +17,14 @@ builder.Services.AddScoped<IProfessorRepository, ProfessorRepository>();
 builder.Services.AddScoped<IDisciplinaRepository, DisciplinaRepository>();
 builder.Services.AddScoped<ITurmaRepository, TurmaRepository>();
 builder.Services.AddScoped<IHorarioTurmaRepository, HorarioTurmaRepository>();
+builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
 
 builder.Services.AddScoped<ICursoService, CursoService>();
 builder.Services.AddScoped<IProfessorService, ProfessorService>();
 builder.Services.AddScoped<IDisciplinaService, DisciplinaService>();
 builder.Services.AddScoped<ITurmaService, TurmaService>();
 builder.Services.AddScoped<IHorarioTurmaService, HorarioTurmaService>();
+builder.Services.AddScoped<IAlunoService, AlunoService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
