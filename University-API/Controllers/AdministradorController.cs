@@ -22,4 +22,12 @@ public class AdministradorController : ControllerBase
         if (resultado.Succeeded) return Ok("Administrador cadastrado!");
         return BadRequest("Falha ao realizar cadastro!");
     }
+
+    [HttpPost("Login")]
+    public async Task<IActionResult> LoginAdm([FromBody] LoginAdmDTO admDTO)
+    {
+        var resultado = await _service.LoginAdm(admDTO);
+        if (resultado.Succeeded) return Ok("Login efetuado com sucesso.");
+        return NotFound("usuario ou senha incorretos.");
+    }
 }

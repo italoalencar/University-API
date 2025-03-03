@@ -22,4 +22,9 @@ public class AdministradorService
         var adm = _mapper.Map<Administrador>(admDTO);
         return await _repository.Create(adm, admDTO.Password);
     }
+
+    public async Task<SignInResult> LoginAdm(LoginAdmDTO admDTO)
+    {
+        return await _repository.Login(admDTO.UserName, admDTO.Password);
+    }
 }
