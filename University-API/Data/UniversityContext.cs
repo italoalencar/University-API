@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using University_API.Models;
 
 namespace University_API.Data
 {
-    public partial class UniversityContext : DbContext
+    public partial class UniversityContext : IdentityDbContext<Administrador>
     {
         public UniversityContext()
         {
@@ -28,6 +29,7 @@ namespace University_API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.HasPostgresEnum("situacao_type", new[] { "ativo", "inativo", "formado" })
                 .HasPostgresEnum("status_type", new[] { "em andamento", "concluida", "reprovada", "trancada", "suprimida" });
 
