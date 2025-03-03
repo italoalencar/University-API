@@ -9,12 +9,14 @@ namespace University_API.Services;
 public class AdministradorService
 {
     private readonly AdministradorRepository _repository;
+    private readonly TokenService _tokenService;
     private readonly IMapper _mapper;
 
-    public AdministradorService(AdministradorRepository repository, IMapper mapper)
+    public AdministradorService(AdministradorRepository repository, IMapper mapper, TokenService tokenService)
     {
         _repository = repository;
         _mapper = mapper;
+        _tokenService = tokenService;
     }
 
     public async Task<IdentityResult> CreateAdm(CreateAdmDTO admDTO)
@@ -23,8 +25,10 @@ public class AdministradorService
         return await _repository.Create(adm, admDTO.Password);
     }
 
-    public async Task<SignInResult> LoginAdm(LoginAdmDTO admDTO)
+    public async Task<string> LoginAdm(LoginAdmDTO admDTO)
     {
-        return await _repository.Login(admDTO.UserName, admDTO.Password);
+        var usuario = await _repository.Login(admDTO.UserName, admDTO.Password);
+        var token = _tokenService.GenerateToken(usuario);
+        return token;
     }
 }

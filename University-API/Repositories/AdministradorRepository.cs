@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Server.IIS.Core;
 using University_API.Models;
 
 namespace University_API.Repositories;
@@ -20,8 +21,14 @@ public class AdministradorRepository
         return await _userManager.CreateAsync(adm, senha);
     }
 
-    public async Task<SignInResult> Login(string username, string password)
+    public async Task<Administrador> Login(string username, string password)
     {
-        return await _signInManager.PasswordSignInAsync(username, password, false, false);
+        var result = await _signInManager.PasswordSignInAsync(username, password, false, false);
+        if (result.Succeeded)
+        {
+            return _userManager.Users.FirstOrDefault(user => 
+            user.NormalizedUserName.Equals(username.ToUpper()))!;
+        }
+        throw new ApplicationException("Não foi possível efetuar o login.");
     }
 }

@@ -36,6 +36,7 @@ builder.Services.AddScoped<IHorarioTurmaService, HorarioTurmaService>();
 builder.Services.AddScoped<IAlunoService, AlunoService>();
 builder.Services.AddScoped<IMatriculaService, MatriculaService>();
 builder.Services.AddScoped<AdministradorService>();
+builder.Services.AddScoped<TokenService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
