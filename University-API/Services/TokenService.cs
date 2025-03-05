@@ -9,6 +9,13 @@ namespace University_API.Services;
 
 public class TokenService
 {
+    private readonly IConfiguration _config;
+
+    public TokenService(IConfiguration config)
+    {
+        _config = config;
+    }
+
     public string GenerateToken(Administrador adm)
     {
         Claim[] claims = new Claim[]
@@ -18,7 +25,8 @@ public class TokenService
             new Claim(ClaimTypes.DateOfBirth, adm.DataNasc.ToString())
         };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("n5fCsGTr984nf9Gi8967N9J9jsVF7SG1Pk9B1"));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+             _config["AppSettings:SymmetricSecurityKey"]));
 
         var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

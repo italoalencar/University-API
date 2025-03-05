@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using University_API.DTOs;
 using University_API.Services;
 
@@ -24,6 +25,7 @@ public class AdministradorController : ControllerBase
     }
 
     [HttpPost("Login")]
+    [AllowAnonymous]
     public async Task<IActionResult> LoginAdm([FromBody] LoginAdmDTO admDTO)
     {
         var token = await _service.LoginAdm(admDTO);
